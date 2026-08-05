@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="BuildFixBench is a benchmark dataset for reproducing and repairing fuzzing build failures."
+    >
+    <title>BuildFixBench</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav">
+        <a class="brand" href="#">BuildFixBench</a>
+        <div class="nav-links">
+          <a href="#dataset">Dataset</a>
+          <a href="#schema">Schema</a>
+          <a href="https://github.com/xingyaner/BuildFixBench">GitHub</a>
+        </div>
+      </nav>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Fuzzing build failure repair benchmark</p>
+          <h1>BuildFixBench</h1>
+          <p>
+            A reproducible benchmark dataset for studying automated repair of
+            OSS-Fuzz build failures.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#dataset">Explore dataset</a>
+            <a class="button" href="data/projects.yaml">Download YAML</a>
+            <a class="button" href="data/projects.json">Download JSON</a>
+          </div>
+        </div>
+        <div class="hero-panel" aria-label="Dataset summary">
+          <div>
+            <span id="caseCount">--</span>
+            <p>cases</p>
+          </div>
+          <div>
+            <span id="projectCount">--</span>
+            <p>projects</p>
+          </div>
+          <div>
+            <span id="version">v0.1</span>
+            <p>dataset version</p>
+          </div>
+        </div>
+      </section>
+    </header>
+
+    <main>
+      <section class="section intro">
+        <div>
+          <h2>Reproducible Failure Cases</h2>
+          <p>
+            Each case records the metadata needed to initialize the OSS-Fuzz
+            environment and reproduce the observed failing build, including the
+            OSS-Fuzz revision, upstream revision, base image digest, fuzzing
+            engine, sanitizer, architecture, and archived build log.
+          </p>
+        </div>
+        <div class="citation">
+          <strong>Error taxonomy</strong>
+          <p>
+            Failure categories follow the 25 fine-grained root causes reported
+            in <em>My Fuzzers Won't Build: An Empirical Study of Fuzzing Build
+            Failures</em>.
+          </p>
+        </div>
+      </section>
+
+      <section class="section charts" aria-label="Dataset statistics">
+        <div class="chart-block">
+          <div class="section-title">
+            <h2>Language Distribution</h2>
+            <p>Computed from the current dataset file.</p>
+          </div>
+          <canvas id="languageChart" height="260"></canvas>
+        </div>
+        <div class="chart-block">
+          <div class="section-title">
+            <h2>Error Categories</h2>
+            <p>Fine-grained RC labels normalized before aggregation.</p>
+          </div>
+          <canvas id="categoryChart" height="260"></canvas>
+        </div>
+      </section>
+
+      <section id="dataset" class="section dataset">
+        <div class="section-title">
+          <h2>Dataset Cases</h2>
+          <p>
+            Search by project, language, repository, SHA, error category, or
+            build log. Links and hashes are shortened in the table and expanded
+            in the details view.
+          </p>
+        </div>
+
+        <div class="controls">
+          <label class="search">
+            <span>Search</span>
+            <input id="searchInput" type="search" placeholder="project, sha, category, url">
+          </label>
+          <label>
+            <span>Language</span>
+            <select id="languageFilter"></select>
+          </label>
+          <label>
+            <span>Engine</span>
+            <select id="engineFilter"></select>
+          </label>
+          <label>
+            <span>Sanitizer</span>
+            <select id="sanitizerFilter"></select>
+          </label>
+          <label>
+            <span>Architecture</span>
+            <select id="architectureFilter"></select>
+          </label>
+          <label>
+            <span>Category</span>
+            <select id="categoryFilter"></select>
+          </label>
+        </div>
+
+        <div class="table-meta">
+          <span id="resultCount">Loading cases...</span>
+          <button id="resetFilters" type="button">Reset filters</button>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Project</th>
+                <th>Language</th>
+                <th>Failure Date</th>
+                <th>OSS-Fuzz SHA</th>
+                <th>Build Log</th>
+                <th>Upstream Repo</th>
+                <th>Engine</th>
+                <th>Sanitizer</th>
+                <th>Arch</th>
+                <th>Error Category</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="casesBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="schema" class="section schema">
+        <div class="section-title">
+          <h2>Metadata Schema</h2>
+          <p>
+            Public records omit the repair outcome field and retain the
+            reproducibility metadata needed for auditing and benchmark
+            execution.
+          </p>
+        </div>
+        <div id="schemaGrid" class="schema-grid"></div>
+      </section>
+    </main>
+
+    <dialog id="detailsDialog">
+      <div class="dialog-header">
+        <div>
+          <p class="eyebrow">Case details</p>
+          <h2 id="detailsTitle">Case</h2>
+        </div>
+        <button id="closeDialog" type="button" aria-label="Close details">Close</button>
+      </div>
+      <dl id="detailsList"></dl>
+    </dialog>
+
+    <script src="app.js"></script>
+  </body>
+</html>
