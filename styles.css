@@ -205,6 +205,61 @@ button {
   padding: 24px;
 }
 
+.reproduction {
+  padding-top: 24px;
+}
+
+.lock-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 24px;
+}
+
+.lock-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  min-height: 190px;
+  padding: 20px;
+}
+
+.lock-number {
+  color: var(--gold);
+  display: block;
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  margin-bottom: 24px;
+}
+
+.lock-card h3 {
+  font-size: 17px;
+  margin: 0 0 8px;
+}
+
+.lock-card p,
+.lock-note {
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 0;
+}
+
+code {
+  background: #eef2ec;
+  border-radius: 4px;
+  color: var(--accent-strong);
+  font-size: 0.92em;
+  padding: 2px 5px;
+}
+
+.lock-note {
+  background: #fff8ea;
+  border-left: 3px solid var(--gold);
+  margin-top: 14px;
+  padding: 14px 16px;
+}
+
 .charts {
   display: grid;
   gap: 22px;
@@ -407,7 +462,8 @@ dd {
 
   .hero,
   .intro,
-  .charts {
+  .charts,
+  .lock-grid {
     grid-template-columns: 1fr;
   }
 
@@ -445,7 +501,8 @@ dd {
   }
 
   .controls,
-  .schema-grid {
+  .schema-grid,
+  .lock-grid {
     grid-template-columns: 1fr;
   }
 

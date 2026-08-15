@@ -16,6 +16,7 @@
         <a class="brand" href="#">BuildFixBench</a>
         <div class="nav-links">
           <a href="#dataset">Dataset</a>
+          <a href="#reproduction">Reproduce</a>
           <a href="#schema">Schema</a>
           <a href="https://github.com/xingyaner/BuildFixBench">GitHub</a>
         </div>
@@ -46,6 +47,10 @@
           <div>
             <span id="version">v0.1</span>
             <p>dataset version</p>
+          </div>
+          <div>
+            <span id="updatedAt">--</span>
+            <p>last generated</p>
           </div>
         </div>
       </section>
@@ -86,6 +91,45 @@
             <p>Fine-grained RC labels normalized before aggregation.</p>
           </div>
           <canvas id="categoryChart" height="260"></canvas>
+        </div>
+      </section>
+
+      <section id="reproduction" class="section reproduction">
+        <div class="section-title">
+          <h2>Reproduction lock</h2>
+          <p>
+            A case is reproducible only when the source tree and build
+            environment are pinned together. Use the values in each record as
+            immutable inputs before running the failing build.
+          </p>
+        </div>
+        <div class="lock-grid">
+          <article class="lock-card">
+            <span class="lock-number">01</span>
+            <h3>OSS-Fuzz revision</h3>
+            <p>Switch to the exact <code>oss-fuzz_sha</code> recorded for the case.</p>
+          </article>
+          <article class="lock-card">
+            <span class="lock-number">02</span>
+            <h3>Upstream revision</h3>
+            <p>Clone <code>software_repo_url</code>, then check out the exact <code>software_sha</code>.</p>
+          </article>
+          <article class="lock-card">
+            <span class="lock-number">03</span>
+            <h3>Dockerfile inputs</h3>
+            <p>Inspect the project Dockerfile in OSS-Fuzz or upstream. Pin <code>FROM</code> to the recorded <code>base_image_digest</code>.</p>
+          </article>
+          <article class="lock-card">
+            <span class="lock-number">04</span>
+            <h3>Clone source</h3>
+            <p>Update any Dockerfile <code>git clone</code> URL and checkout to match <code>software_repo_url</code> and <code>software_sha</code>.</p>
+          </article>
+        </div>
+        <div class="lock-note">
+          <strong>Important:</strong> the Dockerfile may be maintained by OSS-Fuzz
+          or by the upstream project. If a Dockerfile pins a different source or
+          base image, treat it as part of the reproduction setup and align it
+          with the case metadata before building.
         </div>
       </section>
 

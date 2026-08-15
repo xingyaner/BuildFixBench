@@ -54,6 +54,7 @@ const els = {
   caseCount: document.querySelector("#caseCount"),
   projectCount: document.querySelector("#projectCount"),
   version: document.querySelector("#version"),
+  updatedAt: document.querySelector("#updatedAt"),
   languageChart: document.querySelector("#languageChart"),
   categoryChart: document.querySelector("#categoryChart"),
   searchInput: document.querySelector("#searchInput"),
@@ -308,6 +309,7 @@ async function init() {
   els.caseCount.textContent = String(payload.summary?.total_cases ?? state.records.length);
   els.projectCount.textContent = String(payload.summary?.projects ?? uniqueValues(state.records, "project").length);
   els.version.textContent = payload.version || "v0.1";
+  els.updatedAt.textContent = payload.generated_at || "n/a";
 
   fillSelect(els.languageFilter, uniqueValues(state.records, "language"));
   fillSelect(els.engineFilter, uniqueValues(state.records, "engine"));

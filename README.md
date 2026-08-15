@@ -3,9 +3,12 @@
 BuildFixBench is a benchmark dataset for reproducing and repairing fuzzing build
 failures observed in OSS-Fuzz.
 
-The website is a static GitHub Pages site that reads the public dataset from
-[`data/projects.json`](data/projects.json). The matching YAML artifact is
-available at [`data/projects.yaml`](data/projects.yaml).
+Live website: [https://xingyaner.github.io/BuildFixBench/](https://xingyaner.github.io/BuildFixBench/)
+
+The website is a static GitHub Pages site that reads the generated public
+dataset from [`data/projects.json`](data/projects.json). Upload or update the
+source YAML at [`data/projects.yaml`](data/projects.yaml); the Pages workflow
+regenerates the JSON and deploys the updated page automatically.
 
 ## Dataset
 
@@ -31,20 +34,28 @@ The public artifacts intentionally omit `fixed_state`.
 
 ## Updating Data
 
-Regenerate the public data artifacts from a source `projects.yaml`:
+`data/projects.yaml` is the single source of truth for the published records.
+To update the site, replace that file and push the commit. The workflow runs:
 
 ```bash
-python3 scripts/build_data.py /path/to/projects.yaml --version v0.1
+python3 scripts/build_data.py data/projects.yaml --version v0.2
 ```
 
-This writes:
+For a local update, run the same command from the repository root. It writes:
 
 - `data/projects.yaml`
 - `data/projects.json`
 
 Both outputs remove hidden fields before publication.
 
+The public page also documents the reproduction lock: use the case's
+`oss-fuzz_sha`, `software_sha`, `software_repo_url`, and `base_image_digest`.
+Check Dockerfiles in both OSS-Fuzz and the upstream repository because either
+location may own the base image or clone step.
+
 ## Website
+
+访问页面：[https://xingyaner.github.io/BuildFixBench/](https://xingyaner.github.io/BuildFixBench/)
 
 The site is implemented without a frontend build step:
 
