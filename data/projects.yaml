@@ -24,7 +24,7 @@
   architecture: x86_64
   base_image_digest: 1051d1a0a51f82987e4fa36f85dd8cee525df635f8523ac35575086979625e67
   error_category: RC13
-  root_cause_commit: 97c3f28ad0dc2dc4782483c57c4a71050d7afd75
+  root_cause_commit: a3ed8e10ab36fe86b7dfda13e0ddfc9c5ecb802a
   root_cause_workspace: UPSTREAM
 - project: trafficserver
   language: c++

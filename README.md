@@ -27,6 +27,18 @@ reproduce the observed failing build, including:
 
 The public artifacts intentionally omit `fixed_state`.
 
+## Merged Fixes
+
+The following benchmark cases have corresponding merged fixes:
+
+| Project | Failure Date | Merge Date | Change Area | References | Merged Commit |
+| --- | --- | --- | --- | --- | --- |
+| uint256 | 2026.2.29 | 2026.8.24 | Upstream change | [Issue #223](https://github.com/holiman/uint256/issues/223), [PR #224](https://github.com/holiman/uint256/pull/224) | [3b6e9cde](https://github.com/holiman/uint256/commit/3b6e9cdebb7a0462a2748bf24d7fac2b8a943666) |
+| tomcat | 2026.8.12 | 2026.9.15 | OSS-Fuzz code change | [OSS-Fuzz PR #16127](https://github.com/google/oss-fuzz/pull/16127) | [5aed4560](https://github.com/google/oss-fuzz/commit/5aed4560637a86f22ab6514c6fa451fea5019310) |
+| compress | 2026.9.4 | 2026.9.16 | Upstream change | [Issue #1221](https://github.com/klauspost/compress/issues/1221), [PR #1222](https://github.com/klauspost/compress/pull/1222) | [de8f55df](https://github.com/klauspost/compress/commit/de8f55df9fb3af7aec787942d6b3c71e045bfee9) |
+| mdbook-i18n-helpers | 2025.06.03 | 2026.9.16 | Dockerfile change | [OSS-Fuzz PR #16138](https://github.com/google/oss-fuzz/pull/16138) | [1d2405cf](https://github.com/google/oss-fuzz/commit/1d2405cfbf4e7819cb5d5a73aa8dfc5b55894e35) |
+| libunwind | 2026.8.29 | 2026.9.16 | build.sh change | [OSS-Fuzz PR #16137](https://github.com/google/oss-fuzz/pull/16137) | [70a468cd](https://github.com/google/oss-fuzz/commit/70a468cd8a80cfae2f4db3316cb2476835d6618e) |
+
 ## Error Categories
 
 `error_category` follows the 25 fine-grained root causes from
